@@ -1,7 +1,6 @@
 <template>
   <div>
       <titleTop/>
-    shouye
   </div>
 </template>
 <script>
