@@ -29,6 +29,11 @@ export default new Router({
           redirect: './film'
         }
       ]
+    },
+    {
+      path: '/city',
+      name: 'city',
+      component: () => import('./views/City/index.vue')
     }
   ]
 })
