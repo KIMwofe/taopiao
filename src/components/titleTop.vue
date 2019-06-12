@@ -1,6 +1,6 @@
 <template>
   <div class="top">
-    <router-link to="cinerma">
+    <router-link to="/city" class="a">
       <plathTop/>
     </router-link>
     <van-tabs v-model="curFilmType" :line-width="15" :title-active-color="titleactivecolor" @click="filmChange">
@@ -73,14 +73,16 @@ export default {
 <style lang="less">
 .top {
   display: flex;
+  .a {
+    position: relative;
+    z-index: 5;
+  }
   .van-tabs--line {
      width: 100%;
     position: absolute;
     top: 0;
     right: 0;
-    height: 150vw;
-  overflow-y: auto;
-
+    z-index: 0;
     .van-tabs__wrap{
       left: auto;
     }
