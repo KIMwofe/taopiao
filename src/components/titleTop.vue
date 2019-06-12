@@ -80,6 +80,7 @@ export default {
     right: 0;
     height: 150vw;
   overflow-y: auto;
+
     .van-tabs__wrap{
       left: auto;
     }
