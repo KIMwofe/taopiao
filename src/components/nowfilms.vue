@@ -11,7 +11,7 @@
                 <h3>导演： {{ film.actors | fordirector }}</h3>
                 <h4>主演： {{ film.actors | formatActor }}</h4>
             </div>
-            <span v-if="filmType === 'nowPlaying'" style="">购票</span>
+            <span v-if="filmType === 'nowPlaying' && film.grade" style="">购票</span>
             <span v-else class="span1">预售</span>
         </a>
 
