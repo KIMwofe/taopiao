@@ -16,7 +16,7 @@
 <script>
 import plathTop from '@/components/plathTop.vue'
 import nowfilms from '@/components/nowfilms.vue'
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -45,6 +45,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('film', [
+      'ADDPAGENUM'
+    ]),
     ...mapActions('film', [
       'getFilmList',
       'filmChange'
@@ -53,7 +56,7 @@ export default {
       // 判断当前是否滚动到了底部
       let scrollTop = document.documentElement.scrollTop // 滚动条距离顶部的距离
 
-      let scrollHeight = document.body.scrollHeight // 页面的高度
+      let scrollHeight = document.documentElement.scrollHeight // 页面的高度
       let clientHeight = document.documentElement.clientHeight // 可视区域的高度
       // console.log(scrollTop, scrollHeight, clientHeight);
 
@@ -64,40 +67,22 @@ export default {
       }
     }
   },
+
   created () {
     this.getFilmList()
     window.addEventListener('scroll', this.onScroll)
+  },
+  activated () {
+    window.addEventListener('scroll', this.onScroll)
+  },
+
+  // 失活
+  deactivated () {
+    window.removeEventListener('scroll', this.onScroll)
   }
+
 }
 </script>
 <style lang="less">
-.top {
-  display: flex;
-  .a {
-    position: relative;
-    z-index: 5;
-  }
-  .van-tabs--line {
-     width: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 0;
-    .van-tabs__wrap{
-      left: auto;
-    }
-    .van-tabs__wrap{
-      width: 200px;
-    }
-    .van-tab--active {
-      font-weight: 900;
-    }
-    .van-tabs__nav{
-      background-color: transparent;
-    }
-    .van-tab {
-      font-size: 17px;
-    }
-  }
-}
+@import '~@/styles/common/top.less';
 </style>
