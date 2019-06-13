@@ -21,9 +21,10 @@
 import plath from '@/components/plath.vue'
 import plathTop from '@/components/plathTop.vue'
 import cinermaMain from '@/components/cinermaMain.vue'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
+  name: 'film',
   data () {
     return {
       active: 0,
@@ -38,41 +39,51 @@ export default {
     }
   },
   components: {
-    // cinermaTop,
     cinermaMain,
     plath,
     plathTop
   },
   computed: {
     ...mapState('cinerma', [
-      'cinemaList'
+      'cinemaList',
+      'loading'
     ])
   },
   methods: {
+    ...mapMutations('cinerma', [
+      'ADDPAGENUM'
+    ]),
     ...mapActions('cinerma', [
-      'getcimaList'
+      'getcimaList',
+      'cinemaChange'
     ]),
 
     onScroll () {
       let scrollTop = document.documentElement.scrollTop
       let scrollHeight = document.body.scrollHeight
       let clientHeight = document.documentElement.clientHeight
-      console.log(scrollTop, scrollHeight, clientHeight)
+      // console.log(scrollTop, scrollHeight, clientHeight)
 
       if ((scrollHeight - clientHeight) - scrollTop < 50) {
-        console.log('到底了')
+        // console.log('到底了')
+        if (!this.loading) {
+          this.getcimaList(true)
+        }
       }
     }
   },
   created () {
     this.getcimaList()
-
     window.addEventListener('scroll', this.onScroll)
   },
   watch: {
     cinemaList (newVal, oldVal) {
       // let arr = Object.entries(newVal)
+      console.log(newVal)
     }
+    // activated () {
+    //   window.addEventListener('scroll', this.onScroll)
+    // }
   }
 }
 </script>
