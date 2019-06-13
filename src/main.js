@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import './styles/base.less'
 
-import { Tabbar, TabbarItem, Tab, Tabs } from 'vant'
+import { Tabbar, TabbarItem, Tab, Tabs, NavBar } from 'vant'
 import 'vant/lib/index.css'
 
 Vue
@@ -12,6 +12,7 @@ Vue
   .use(TabbarItem)
   .use(Tab)
   .use(Tabs)
+  .use(NavBar)
 Vue.config.productionTip = false
 
 new Vue({
