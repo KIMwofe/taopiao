@@ -51,15 +51,27 @@ export default {
   methods: {
     ...mapActions('cinerma', [
       'getcimaList'
-    ])
+    ]),
+
+    onScroll () {
+      let scrollTop = document.documentElement.scrollTop
+      let scrollHeight = document.body.scrollHeight
+      let clientHeight = document.documentElement.clientHeight
+      console.log(scrollTop, scrollHeight, clientHeight)
+
+      if ((scrollHeight - clientHeight) - scrollTop < 50) {
+        console.log('到底了')
+      }
+    }
   },
   created () {
     this.getcimaList()
+
+    window.addEventListener('scroll', this.onScroll)
   },
   watch: {
     cinemaList (newVal, oldVal) {
       // let arr = Object.entries(newVal)
-      console.log(newVal)
     }
   }
 }

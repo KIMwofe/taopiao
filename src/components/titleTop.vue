@@ -56,7 +56,7 @@ export default {
       // 判断当前是否滚动到了底部
       let scrollTop = document.documentElement.scrollTop // 滚动条距离顶部的距离
 
-      let scrollHeight = document.body.scrollHeight // 页面的高度
+      let scrollHeight = document.documentElement.scrollHeight // 页面的高度
       let clientHeight = document.documentElement.clientHeight // 可视区域的高度
       // console.log(scrollTop, scrollHeight, clientHeight);
 
