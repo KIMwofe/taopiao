@@ -6,7 +6,7 @@
 <script>
 import titleTop from '@/components/titleTop.vue'
 export default {
-
+ name: 'film',
   components: {
     titleTop
   }
