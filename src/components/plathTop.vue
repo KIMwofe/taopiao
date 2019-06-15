@@ -15,7 +15,7 @@ export default {
 </script>
 <style lang="less">
 .city-c {
-  width: 41vw;
+  width: 29vw;
   display: inline-block;
   vertical-align: top;
   height: 3.125rem;
@@ -48,7 +48,7 @@ export default {
       height: 4px;
       position: relative;
       top: 50%;
-      left: 50%;
+      left: 21vw;
       width: 0;
       height: 0;
       border-left: 4px solid transparent;
