@@ -68,7 +68,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { mapGetters, mapActions } from "vuex";
 export default {
@@ -93,7 +92,7 @@ export default {
   created() {
     this.getCityList();
   }
-};
+}
 </script>
 
 
@@ -256,5 +255,3 @@ export default {
   }
 }
 </style>
-
-

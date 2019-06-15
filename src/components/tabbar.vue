@@ -2,10 +2,11 @@
 
     <van-tabbar v-model="active" class="tabbar" active-color="#ff7ba0">
       <van-tabbar-item
-        v-model="active"
          v-for="tab in tabs"
          :key="tab.id"
-         :to="tab.url">
+         :to="tab.url"
+         :name="tab.name"
+         >
            <i :class="['iconfont', tab.icon]"></i>
            <span>{{tab.name}}</span>
          </van-tabbar-item>
@@ -24,7 +25,8 @@ export default {
     return {
       active: 0
     }
-  }
+  },
+  methods: {}
 }
 </script>
 <style lang="less">
