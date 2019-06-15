@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './styles/base.less'
-import { Tabbar, TabbarItem, Tab, Tabs, TreeSelect, Icon, Search, NavBar, Icon, Button, Field } from 'vant'
+import { Tabbar, TabbarItem, Tab, Tabs, TreeSelect, Icon, Search, NavBar, Button, Field } from 'vant'
 import 'vant/lib/index.css'
 
 Vue
