@@ -42,7 +42,7 @@ export default {
       return getters.newCityList.map(item => item.py)
     }
     // getName (state) {
-    //   return state.newCityList.list.cityId
+    //   return state.cityList.map(item => item.name)
     // }
   },
   mutations: {
