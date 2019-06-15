@@ -20,7 +20,7 @@
                 </div>
                 <ul class="city-index-detail">
                   <li class="city-item-detail">
-                    <div class="city-item-text">深圳</div>
+                    <div class="city-item-text" >深圳</div>
                   </li>
                   <div class="right-list">
                     <ul>
@@ -50,6 +50,7 @@
             <p>{{item.py}}</p>
             <ul>
               <li
+              v-on:click.once="onClick"
               class="city-show"
               v-for="city in item.list"
               :key="city.cityId"
@@ -74,7 +75,7 @@ export default {
   name: "City",
 
   computed: {
-    ...mapGetters("city", ["newCityList", "hotList", "indexlist"])
+    ...mapGetters("city", ["newCityList", "hotList", "indexlist",'getName'])
   },
 
   methods: {
@@ -84,9 +85,9 @@ export default {
         path: "/film" //跳转路由
       })
     },
-    getCity(newCityList){
-    return console.log(this.newCityList)
-    }
+    // getCity( getName ){
+    //   console.log(this.getName)
+    // }
   },
 
   created() {

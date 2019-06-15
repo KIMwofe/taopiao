@@ -41,6 +41,9 @@ export default {
     indexlist (state, getters) {
       return getters.newCityList.map(item => item.py)
     }
+    // getName (state) {
+    //   return state.newCityList.list.cityId
+    // }
   },
   mutations: {
     SETCITYLIST (state, list) {

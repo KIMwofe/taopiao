@@ -1,22 +1,18 @@
 <template>
   <form action>
     <div class="log"></div>
-    <van-cell-group>
-      <van-field
+      <input
         class="inp-name"
-        v-model="username"
-        clearable
         right-icon="question-o"
         placeholder="请输入手机号"
         @click-right-icon="$toast('question')"
       />
-    </van-cell-group>
     <div class="get-box">
-      <van-cell-group>
-        <van-field v-model="sms" center clearable placeholder="校验码">
+      <!-- <van-cell-group name="get-num"> -->
+        <van-field  center clearable placeholder="校验码">
           <van-button class="get-num" slot="button" size="small" type="primary">获取短信校验码</van-button>
         </van-field>
-      </van-cell-group>
+      <!-- </van-cell-group> -->
     </div>
 
     <div class="reg-sec">
@@ -36,10 +32,19 @@ export default {
         path: "/Reg" //跳转路由
       });
     },
-    regCenter () {
-      this.$router.push({
-        path: "/center" //跳转路由
-      });
+     regCenter() {
+      // this.$router.push({
+      //   path: "/center" //跳转路由
+      // });
+      setTimeout(() => {
+        let userInfo = {
+          name: "张三",
+          pwd: "123"
+        };
+        window.localStorage.setItem("userInfo", JSON.stringify(userInfo));
+        //登录成功，跳转回个人页面
+        this.$router.push("/center");
+      },1000);
     }
   }
 };
@@ -59,9 +64,10 @@ body {
 }
 .inp-name {
   width: 90%;
+  border: none;
   border-bottom: 1px solid red;
   margin: 10px 5% 10px 5%;
-  text-align: center;
+
 }
 .get-box {
   border-bottom: 1px solid red;

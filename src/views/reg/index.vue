@@ -1,17 +1,29 @@
 <template>
   <form action>
     <div class="log"></div>
-    <van-cell-group>
-      <van-field
+    <!-- <van-field
         class="inp-name"
+         v-model="inputValue"
         clearable
-        name="num1"
         right-icon="question-o"
         placeholder="手机号/会员号/邮箱"
         @click-right-icon="$toast('question')"
       />
-      <van-field name="num2" class="inp-name" type="password" placeholder="请输入密码" input/>
-    </van-cell-group>
+      <van-field
+      v-model="password"
+      class="inp-name"
+    type="password" placeholder="请输入密码" input/>-->
+    <input
+      class="inp-name"
+      required
+      clearable
+      label="用户名"
+      right-icon="question-o"
+      placeholder="请输入用户名"
+      @click-right-icon="$toast('question')"
+    />
+
+    <input class="inp-name"  type="password" label="密码" placeholder="请输入密码" required/>
     <div class="reg-sec">
       <a class="reg-phon" @click="regPhone">短信验证码登录</a>
       <a class="lon">立即注册</a>
@@ -41,7 +53,7 @@ export default {
         window.localStorage.setItem("userInfo", JSON.stringify(userInfo));
         //登录成功，跳转回个人页面
         this.$router.push("/center");
-      });
+      },1000);
     }
   }
 };
@@ -56,15 +68,15 @@ export default {
   margin: 40px auto 40px;
 }
 .inp-name {
-  // // font-size: inherit;
+  font-size: inherit;
   width: 90%;
-  // height: 1.48rem;
-  // // margin: 0 0 .17333333rem .12rem;
-  // // outline: none;
+  height: 1.48rem;
+  margin: 0 0 .17333333rem .12rem;
+  outline: none;
+  border: none;
   border-bottom: 1px solid red;
-  // color: #333;
+  color: #333;
   margin: 10px 5% 10px 5%;
-  text-align: center;
 }
 .reg-sec {
   width: 90%;
