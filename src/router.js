@@ -55,6 +55,8 @@ export default new Router({
       path: '/regNum',
       name: 'regNum',
       component: () => import('./views/reg/reg-num.vue')
+    },
+    {
       path: '/search',
       name: 'search',
       component: () => import('./views/search/index.vue')
