@@ -54,7 +54,6 @@
               class="city-show"
               v-for="city in item.list"
               :key="city.cityId"
-              @click="getCity"
               >{{city.name}}</li>
             </ul>
           </li>
@@ -83,7 +82,7 @@ export default {
       this.$router.push({
         path: "/film" //跳转路由
       })
-    },
+    }
     // getCity( getName ){
     //   console.log(this.getName)
     // }
