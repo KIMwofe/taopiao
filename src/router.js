@@ -34,6 +34,14 @@ export default new Router({
       path: '/city',
       name: 'city',
       component: () => import('./views/City/index.vue')
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: () => import('./views/search/index.vue')
     }
-  ]
+  ],
+  scrollBehavior (to, from, savePosition) {
+    return { x: 0, y: 0 }
+  }
 })

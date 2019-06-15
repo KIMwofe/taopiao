@@ -6,13 +6,16 @@
         </router-link>
         <div class="topbar">
           <ol>
-            <li v-for="item in items" :key="item.id">
+            <li v-for="(item,index) in items" :key="item.id" @click="fn(index,$event)">
               {{ item.name }} <span>✓</span>
             </li>
           </ol>
         </div>
+        <router-link to="/search" class="van-icon2">
+          <van-icon name="search" />
+        </router-link>
     </div>
-    <plath :num="num"/>
+    <plath :current="current"  id="plaths" :display="display"  />
     <cinermaMain :list="cinemaList"/>
   </div>
  </template>
@@ -35,7 +38,9 @@ export default {
         { id: 1, name: '全城' },
         { id: 2, name: '综合排序' },
         { id: 3, name: '特色' }
-      ]
+      ],
+      current: 4,
+      display: 'display:none'
     }
   },
   components: {
@@ -46,7 +51,8 @@ export default {
   computed: {
     ...mapState('cinerma', [
       'cinemaList',
-      'loading'
+      'loading',
+      'plathList'
     ])
   },
   methods: {
@@ -55,9 +61,9 @@ export default {
     ]),
     ...mapActions('cinerma', [
       'getcimaList',
-      'cinemaChange'
+      'cinemaChange',
+      'getplathName'
     ]),
-
     onScroll () {
       let scrollTop = document.documentElement.scrollTop
       let scrollHeight = document.body.scrollHeight
@@ -70,20 +76,30 @@ export default {
           this.getcimaList(true)
         }
       }
+    },
+    fn (index, e) {
+      this.current = index
+      this.display = 'display:block'
+      // console.log(this.current)
+      return (this.current, this.display)
     }
   },
   created () {
     this.getcimaList()
+    this.getplathName()
     window.addEventListener('scroll', this.onScroll)
   },
   watch: {
-    cinemaList (newVal, oldVal) {
+    plathList (newVal, oldVal) {
       // let arr = Object.entries(newVal)
-      console.log(newVal)
     }
-    // activated () {
-    //   window.addEventListener('scroll', this.onScroll)
-    // }
+  },
+  activated () {
+    window.addEventListener('scroll', this.onScroll)
+  },
+  // 失活
+  deactivated () {
+    window.removeEventListener('scroll', this.onScroll)
   }
 }
 </script>
@@ -91,4 +107,9 @@ export default {
 <style lang="less">
 @import '~@/styles/common/top.less';
 @import '~@/styles/common/plathtop.less';
+.van-icon2 {
+    position: relative;
+    top: -1px;
+    left: 17px;
+}
 </style>
