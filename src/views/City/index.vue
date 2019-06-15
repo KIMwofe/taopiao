@@ -1,63 +1,66 @@
 <template>
   <div class="page-city">
     <!-- 使用插件库中的导航栏插件 -->
-    <van-nav-bar
-      title="城市选择"
-      left-text="返回"
-      left-arrow
-    />
+    <!-- <van-nav-bar title="城市选择">
+     <van-icon name="cross"/>
+    </van-nav-bar>-->
+    <van-nav-bar title="城市选择">
+      <van-icon class="city-close" name="cross" slot="right" @click="onClick"/>
+    </van-nav-bar>
+
     <div class="city-list">
       <div class="lv-indexlist">
         <ul class="lv-indexlist__content" id="lv-indexlist__content">
           <div class="recommend-city">
             <div class="gprs-city">
-              <div class="city-index-title">GPS定位你所在城市</div>
+              <div class="hot-city">
+                <div class="city-index-title">
+                  当前
+                  <!-- <p>现在</p> -->
+                </div>
+                <ul class="city-index-detail">
+                  <li class="city-item-detail">
+                    <div class="city-item-text">深圳</div>
+                  </li>
+                  <div class="right-list">
+                    <ul>
+                      <li>当前</li>
+                      <li>GPS</li>
+                      <li>热门</li>
+                    </ul>
+                  </div>
+                </ul>
+              </div>
+              <div class="city-index-title">GPS</div>
               <ul class="city-index-detail">
                 <li class="city-item-detail city-item-detail-gprs">
-                  <div class="city-item-text">定位失败</div>
+                  <div class="city-item-text1">浏览器定位失败</div>
                 </li>
               </ul>
-            </div>
-            <div class="hot-city">
               <div class="city-index-title">热门城市</div>
               <ul class="city-index-detail">
-                <li
-                class="city-item-detail"
-                v-for="city in hotList"
-                :key="city.cityId"
-                >
-                <div class="city-item-text">
-                  {{ city.name}}</div>
+                <li class="city-item-detail1" v-for="city in hotList" :key="city.cityId">
+                  <div class="city-item-text">{{ city.name }}</div>
                 </li>
               </ul>
             </div>
           </div>
-           <!-- 循环拿到的数组，将城市名字渲染在页面 -->
-          <li class="lv-indexsection"
-            v-for="item in newCityList"
-            :key="item.py"
-          >
+          <!-- 循环拿到的数组，将城市名字渲染在页面 -->
+          <li class="lv-indexsection" v-for="item in newCityList" :key="item.py">
             <p>{{item.py}}</p>
             <ul>
-            <li
+              <li
+              class="city-show"
               v-for="city in item.list"
               :key="city.cityId"
-            >
-            {{city.name}}
-            </li>
-
+              @click="getCity"
+              >{{city.name}}</li>
             </ul>
           </li>
         </ul>
         <div class="lv-indexlist__nav">
           <ul>
-          <li
-            v-for="index in indexlist"
-            :key="index"
-          >
-          {{ index }}
-          </li>
-
+            <li v-for="index in indexlist" :key="index">{{ index }}</li>
           </ul>
         </div>
       </div>
@@ -66,35 +69,53 @@
 </template>
 
 <script>
- import  { mapGetters, mapActions} from 'vuex';
- export default {
-      name:'City',
+import { mapGetters, mapActions } from "vuex";
+export default {
+  name: "City",
 
-      computed: {
-        ...mapGetters('city', ['newCityList','hotList','indexlist'])
+  computed: {
+    ...mapGetters("city", ["newCityList", "hotList", "indexlist"])
+  },
 
-      },
+  methods: {
+    ...mapActions("city", ["getCityList"]),
+    onClick() {
+      this.$router.push({
+        path: "/film" //跳转路由
+      })
+    },
+    getCity(newCityList){
+    return console.log(this.newCityList)
+    }
+  },
 
-      methods:{
-       ...mapActions('city', ['getCityList'])
-      },
-
-      created (){
-        this.getCityList()
-      }
-}
+  created() {
+    this.getCityList();
+  }
+};
 </script>
 
+
 <style lang="less">
- @import '~@/styles/common/mixins.less';
- .page-city {
+@import "~@/styles/common/mixins.less";
+
+.page-city {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
+.van-nav-bar__right {
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  font-size: 20px;
+  .van-icon::before {
+    color: #777;
+  }
+}
 
 .city-list {
-  flex: 1;//占据剩余高度
+  flex: 1;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -122,7 +143,7 @@
       li {
         height: 18px;
         font-size: 12px;
-        color: #191a1b;
+        color: #349cec;
         padding: 0 6px;
       }
     }
@@ -135,6 +156,13 @@
         height: 30px;
         line-height: 30px;
       }
+      p {
+        background-color: #f4f4f4;
+        height: 20px;
+        font-size: 14px;
+        line-height: 20px;
+        padding: 9px 12px;
+      }
 
       ul {
         display: flex;
@@ -143,11 +171,12 @@
         margin-bottom: -1px;
         li {
           .border-bottom;
+          width: 100%;
           position: relative;
-          width: 33.33%;
+
           height: 48px;
           line-height: 48px;
-          text-align: center;
+          // text-align: center;
           text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;
@@ -160,32 +189,65 @@
       padding-top: 15px;
 
       .city-index-title {
-        font-size: 13px;
+        font-size: 14px;
         color: #797d82;
         margin-bottom: 10px;
+        .p {
+          position: absolute;
+          bottom: 3px;
+          left: 5px;
+          color: #349cec;
+        }
       }
 
       .city-index-detail {
         display: flex;
         justify-content: flex-start;
         flex-wrap: wrap;
-
+        width: 260%;
+        .right-list {
+          list-style: none;
+          height: 20px;
+          text-align: center;
+          font-size: 12px;
+          line-height: 20px;
+          color: #349cec;
+          float: right;
+        }
+        .city-item-detail1 {
+          width: 100%;
+          // text-align: center;
+          padding-bottom: 15px;
+          box-sizing: border-box;
+        }
         .city-item-detail {
           width: 33.33%;
           text-align: center;
           padding-bottom: 15px;
           box-sizing: border-box;
-          float: left;
 
           .city-item-text {
+            position: relative;
             height: 30px;
             line-height: 30px;
             background-color: #f4f4f4;
             border-radius: 3px;
             box-sizing: border-box;
             margin: 0 7.5px;
-            font-size: 14px;
+            font-size: 15px;
             color: #191a1b;
+            float: left;
+          }
+          .city-item-text1 {
+            height: 30px;
+            line-height: 30px;
+            background-color: #f4f4f4;
+            border-radius: 3px;
+            box-sizing: border-box;
+            margin: 0 7.5px;
+            font-size: 15px;
+            color: #191a1b;
+            width: 150px;
           }
         }
       }
