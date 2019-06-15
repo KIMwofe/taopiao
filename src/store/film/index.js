@@ -55,7 +55,7 @@ export default {
           commit('SETLOADING', false)
           Toast.clear()
         })
-      }, 2000)
+      }, 1000)
     },
     filmChange ({ dispatch, commit }) {
       commit('ADDPAGENUM', true)
