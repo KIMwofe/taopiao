@@ -65,22 +65,18 @@
   </div>
 </template>
 <script>
- import  { mapGetters, mapActions} from 'vuex';
- export default {
-      name:'City',
-
-      computed: {
-        ...mapGetters('city', ['newCityList','hotList','indexlist'])
-
-      },
-
-      methods:{
-       ...mapActions('city', ['getCityList'])
-      },
-
-      created (){
-        this.getCityList()
-      }
+import { mapGetters, mapActions } from 'vuex'
+export default {
+  name: 'City',
+  computed: {
+    ...mapGetters('city', ['newCityList', 'hotList', 'indexlist'])
+  },
+  methods: {
+    ...mapActions('city', ['getCityList'])
+  },
+  created () {
+    this.getCityList()
+  }
 }
 </script>
 
@@ -192,4 +188,3 @@
   }
 }
 </style>
-
