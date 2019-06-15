@@ -22,7 +22,18 @@ export default new Router({
         {
           path: 'center',
           name: 'center',
-          component: () => import('./views/index/center.vue')
+          component: () => import('./views/index/center.vue'),
+          beforeEnter: (to, from, next) => {
+            if (window.localStorage.getItem('userInfo')) {
+              next()
+            } else {
+              next({
+                path: '/Reg',
+                query: {
+                  redirect: to.fullPath }
+              })
+            }
+          }
         },
         {
           path: '',
@@ -36,6 +47,14 @@ export default new Router({
       component: () => import('./views/City/index.vue')
     },
     {
+      path: '/reg',
+      name: 'reg',
+      component: () => import('./views/reg/index.vue')
+    },
+    {
+      path: '/regNum',
+      name: 'regNum',
+      component: () => import('./views/reg/reg-num.vue')
       path: '/search',
       name: 'search',
       component: () => import('./views/search/index.vue')
